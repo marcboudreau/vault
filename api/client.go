@@ -837,8 +837,8 @@ func (c *Client) Clone() (*Client, error) {
 	defer c.modifyLock.RUnlock()
 
 	config := c.config
-	config.modifyLock.RLock()
-	defer config.modifyLock.RUnlock()
+	config.modifyLock.Lock()
+	defer config.modifyLock.Unlock()
 
 	newConfig := &Config{
 		Address:          config.Address,
